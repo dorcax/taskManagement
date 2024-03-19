@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User{
+  id        Int      @id @default(autoincrement())
+  name     String
+  password String
+  email    String  @unique
+  // provider AuthProvider @default(EMAIL)
+  // googleId String?
+  image    Image[]
+  task     Task[]
+}
+
+model Task{
+  id     Int     @id @default(autoincrement())
+  title String
+  description String
+  dueDate DateTime @default(now())
+  status Taskstatus
+  image   Image[]
+  user    User @relation(fields: [userId],references: [id])
+  userId Int
+}
+
+model Image{
+  id  Int @id @default(autoincrement())
+  // image String
+  task  Task  @relation(fields: [taskId],references: [id])
+  taskId Int  
+  image_id String
+  image_url String
+  user  User @relation(fields: [userId],references: [id])
+  userId Int
+
+}
+
+enum Taskstatus {
+    INCOMPLETE
+  COMPLETE
+}
+
+// enum AuthProvider {
+//   EMAIL
+//   GOOGLE
+// }
