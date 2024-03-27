@@ -4,38 +4,51 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import Task from './pages/Task'
-import Users from './pages/Users'
-import Trash from './pages/Trash'
-import TaskDetails from './pages/TaskDetails'
+
+import TaskTodo from './pages/TaskTodo'
+import TaskImportant from "./pages/TaskImportant"
+import Layout from "./pages/Layout"
+import  {Authprovider} from "../src/Context/LoginHandlers"
+import { TaskContextProvider } from './Context/TaskContext'
+import ProtectedRoute from './pages/ProtectedRoute'
+// import TaskImportant from './pages/TaskImportant'
+
 
 const App = () => {
-
+// const logged =window.localStorage.getItem("")
   const router =createBrowserRouter(
     createRoutesFromElements(
       <Route>
-
-        <Route element={<Layout/>}>
+ 
+        <Route element={<ProtectedRoute><Layout/></ProtectedRoute>}>
+        
           <Route path='/' index element={<Dashboard/>}/>
-          <Route path='task' element={<Task/>}/>
-          <Route path='completed/:statusId' element={<Task/>}/>
-          <Route path='in-progess/:statusId' element={<Task/>}/>
-          <Route path='todo/:statusId' element={<Task/>}/>
-          <Route path='team' element={<Users/>}/>
-          <Route path='trash' element={<Trash/>}/>
-          <Route path='task/:id' element={<TaskDetails/>}/>
-
+          {/* <Route path='task' element={<Task/>}/> */}
+          <Route path='completed' element={<Task/>}/>
+          <Route path='important' element={<TaskImportant/>}/>
+          <Route path='todo' element={<TaskTodo/>}/> 
+         
+        
         </Route>
+  
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Register/>}/>
       </Route>
     )
   )
   return (
-   
-      <RouterProvider router={router}/>
+   <Authprovider>
+     <TaskContextProvider>
+     <RouterProvider router={router}/>
+     </TaskContextProvider>
+  
+      
+   </Authprovider>
       
    
   )
+
 }
+
 
 export default App
