@@ -69,12 +69,12 @@ const navigate =useNavigate()
   return (
     <div className='w-full min-h-screen flex justify-center items-center '>
       {/* lefthand side */}
-      <div className="w-full  flex  items-center justify-center gap-28   ">
-        <div className="flex items-center justify-center flex-col gap-6">
-          <span className="border border-solid border-gray-300 rounded-full  px-2 py-1 text-lg">
+      <div className="w-full  flex flex-col lg:flex-row items-center justify-center gap-28   ">
+        <div className="flex items-center justify-center flex-col gap-6 py-6">
+          <span className="border border-solid border-gray-300 rounded-full  px-2 py-1 text-xl sm:my-5 md:my-0">
             manage all your task in one place
           </span>
-          <p className="flex flex-col gap-3 text-blue-800 text-7xl capitalize font-bold items-center">
+          <p className="flex flex-col gap-4 text-blue-800 text-7xl capitalize font-bold items-center">
             <span>cloud based</span>
             <span className="pb-8">Task Manager</span>
             <span className="border border-solid bg-blue-800 w-28 h-28 rounded-full animate-bounce  "></span>
@@ -82,8 +82,8 @@ const navigate =useNavigate()
         </div>
 
         {/* form side */}
-        <div className="border border-solid max-w-lg w-full  shadow-2xl bg-white flex flex-col justify-center  px-6">
-          <div className="text-blue-800 text-5xl  font-semibold py-4  text-center">
+        <div className="border border-solid md:max-w-2xl sm:max-w-xl w-full  shadow-2xl bg-white flex flex-col justify-center  px-6 my-4">
+          <div className="text-blue-800 text-5xl  font-semibold py-5  text-center">
             <h2>Welcome back!</h2>
           </div>
           <form action="flex flex-col justify-center items-center"  onSubmit={handleSubmit}>
@@ -91,8 +91,8 @@ const navigate =useNavigate()
             
             
        
-            <div className="">
-              <label htmlFor="email" className="capitalize text-black text-2xl  ">
+            <div className="my-4 py-4">
+              <label htmlFor="email" className="capitalize text-black text-3xl  ">
                 email
               </label>
               <input
@@ -101,13 +101,13 @@ const navigate =useNavigate()
                 id="email"
                 value={FORMDATA.email}
                 onChange={handleChange}
-                className="w-full border border-solid rounded-full py-5 focus:outline-none px-4 text-black shadow-xl my-3"
+                className="w-full border border-solid rounded-full py-6 focus:outline-none px-4 text-black shadow-xl my-3 text-xl"
               />
               {error.email && <div className="text-red-600">{error.email}</div> }
             </div>
 
-            <div className=" ">
-              <label htmlFor="password" className="capitalize text-black text-2xl">
+            <div className="my-4  py-4">
+              <label htmlFor="password" className="capitalize text-black text-3xl">
                 password
               </label>
               <input
@@ -116,7 +116,7 @@ const navigate =useNavigate()
                 id="password"
                 value={FORMDATA.password}
                 onChange={handleChange}
-                className="w-full border border-solid rounded-full py-5 focus:outline-none px-4 text-black shadow-xl my-3"
+                className="w-full border border-solid rounded-full py-6 focus:outline-none px-4 text-black shadow-xl my-3 text-xl"
               />
               {error.password && <div className="text-red-600">{error.password}</div>}
             </div>
@@ -126,9 +126,9 @@ const navigate =useNavigate()
                 sign In
               </button>
             </div>
-            <p className="text-xl  text-black mt-2 text-center pb-3">
+            <p className="text-xl  text-black mt-2 text-center pb-4">
               Dont have an account ?
-              <span className="text-blue-600 capitalize">
+              <span className="text-blue-600 capitalize text-lg">
                 <Link to="/signup">signUp</Link>
               </span>
             </p>

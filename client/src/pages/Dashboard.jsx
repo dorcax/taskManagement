@@ -12,7 +12,6 @@ import Sidebar from './Sidebar'
 
 const Dashboard = () => {
   const{task,dispatched}=useContext(TaskContext)
-  const{IsAuthenticated,currentUser} =useContext(AuthContext)
   const [IsOpenModal,CloseModal] =useState(false)
   const[isEdit,setEdit] =useState(null)
 
@@ -21,7 +20,7 @@ const Dashboard = () => {
   useEffect(()=>{
     const getTask =async()=>{
       try {
-        const response =await axios.get("http://localhost:4000/task",{
+        const response =await axios.get("https://taskmanagement-zg03.onrender.com/task",{
           headers:{
             "Authorization":`Bearer ${localStorage.getItem("token")}`
           }
@@ -30,8 +29,8 @@ const Dashboard = () => {
 
       } catch (error) {
         // console.log(error)
-        if(response.error){
-          console.log(error.response)
+        if(error.response){
+          co
         }
 
       }
@@ -72,7 +71,7 @@ return ()=>{
 
   // daashboard code
   return (
-    <div className='border border-solid rounded-lg lg:h-full w-full sm:h-full  bg-[#212121] border-stone-600  px-10  relative'>
+    <div className='border border-solid rounded-lg min-h-screen w-full bg-[#212121] border-stone-600  px-10  relative'>
      
       <div className='text-3xl capitalize py-10 flex justify-between '>
     

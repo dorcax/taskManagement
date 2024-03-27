@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useReducer, useRef,useState } from "react";
 import axios from "axios"
 import { TaskContext } from "../Context/TaskContext";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+// function reducer
 const reducer =(state,action)=>{
   switch(action.type){
     case "Set_TITLE":
@@ -23,7 +26,7 @@ const reducer =(state,action)=>{
   }
 }
 const status ={
-  INCOMPLETE:"INCOMPLETE",
+  TODO:"TODO",
   COMPLETE:"COMPLETE",
   IMPORTANT:"IMPORTANT"
 
@@ -53,11 +56,11 @@ const EditTask = ({closeMenu,taskId,imageId}) => {
   // get the previous 
   const [data, setData] = useState([]);
  
-   
+  //  GET THE PPREVIOUS TASK
   useEffect(()=>{
     const fetchData =async()=>{
      try {
-      const response =await axios.get(`http://localhost:4000/task/${taskId}`,{
+      const response =await axios.get(`https://taskmanagement-zg03.onrender.com/task/${taskId}`,{
         headers:{
           "Authorization":`Bearer ${localStorage.getItem("token")}`
         }
@@ -73,10 +76,33 @@ const EditTask = ({closeMenu,taskId,imageId}) => {
     fetchData()
   },[taskId])
 
+  // validate form
+  const[error,setError] =useState(null)
+  const validateTask =()=>{
+    let newError =[]
+    let valid =true
+
+    if(!state.title.trim()){
+      newError.title="please title is required("
+      valid=false
+    }
+    if(!state.description.trim()){
+      newError.description=" please description is required"
+      valid=false
+    }
+    if(!state.image.trim()){
+      newError.image =" please image is required"
+    }
+    setError(newError)
+    return valid 
+
+  }
   // handle submit of form
   
   const HandleSubmit =async(e)=>{
     e.preventDefault()
+
+    if(validateTask()){
     
     const formData = new FormData();
     formData.append("title",state.title)
@@ -87,7 +113,7 @@ const EditTask = ({closeMenu,taskId,imageId}) => {
     
     try {
      
-      const response =await axios.patch(`http://localhost:4000/task/${taskId}/${imageId}`,formData,
+      const response =await axios.patch(`https://taskmanagement-zg03.onrender.com/task/${taskId}/${imageId}`,formData,
       {
         headers:{
           // "Content-Type": "multipart/form-data",
@@ -96,15 +122,19 @@ const EditTask = ({closeMenu,taskId,imageId}) => {
       })
       
       dispatched({type:"Update_Task",payload:response.data.task})
+      toast.success("Task has been updated")
       dispatch({type:"RESET",initialState})
       closeMenu()
       console.log(response.data.task.id)
       // closeMenu()
     } catch (error) {
-      console.log(error)
+      if(error.response){
+        toast.error(error.response.data.msg)
+      }
     }
 
   }
+}
 
   // function to click outside of the form
 const[prevImage,setPreImage]=useState(null)
@@ -152,15 +182,15 @@ const[prevImage,setPreImage]=useState(null)
               type="file"
               name="image"
               id=""
-              
+              value={prevImage}
               onChange={handleFileChange}
               className="w-full bg-white shadow-2xl border border-solid  mb-4 py-2 rounded-lg"
             />
-            {/* {prevImage &&  <img
+            {prevImage &&  <img
                   src={prevImage}
                   alt="Previous Image"
                   className="w-full h-[200px] mb-4 rounded-lg"
-                />} */}
+                />}
             
           </div>
           <div className="">
@@ -177,7 +207,7 @@ const[prevImage,setPreImage]=useState(null)
             >
               <option value="">select your task status</option>
 
-              <option value={status.INCOMPLETE}>INCOMPLETE</option>
+              <option value={status.TODO}>TODO</option>
 
               <option value={status.COMPLETE}>COMPLETE</option>
               <option value={status.IMPORTANT}>IMPORTANT</option>

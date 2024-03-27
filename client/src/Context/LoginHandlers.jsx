@@ -1,6 +1,8 @@
 import React, { createContext, useReducer } from "react";
 import axios from "axios";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AuthContext = createContext();
 // reducer function to handle switch type
@@ -53,15 +55,19 @@ const Authprovider = ({ children }) => {
   // get user
   const getUser = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/user", {
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-        },
-      });
+      const response = await axios.get(
+        "https://taskmanagement-zg03.onrender.com/user",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       dispatch({ type: "USERLOADED", payload: response.data.user });
     } catch (error) {
       if (error) {
         dispatch({ type: "LOGGIN_ERROR", payload: error.response.data.msg });
+        toast.error(state.isError);
       }
     }
   };
@@ -69,31 +75,30 @@ const Authprovider = ({ children }) => {
   const login = async (FORMDATA) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/user/login",
+        "https://taskmanagement-zg03.onrender.com/user/login",
         FORMDATA
       );
-      dispatch({ type: "LOGGIN_SUCCESS", payload: response.data });
 
       getUser();
-      window.localStorage.setItem("token", response.data.token);
-      window.localStorage.setItem("isLoggedIn",true)
-      
+      localStorage.setItem("token", response.data.token);
+      dispatch({ type: "LOGGIN_SUCCESS", payload: response.data });
+      toast.success("user successfully logged in");
+
       console.log("dorcas");
       console.log(response.data);
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.msg);
         dispatch({ type: "LOGIN_ERROR", payload: error.response.data.msg });
-        //   toast.error(state.error)
+        toast.error(state.isError);
       }
     }
   };
   // logout function
-  const Logout =()=>{
-    localStorage.removeItem("token")
-    dispatch({type:"LOGOUT"})
-    
-  }
+  const Logout = () => {
+    localStorage.removeItem("token");
+    dispatch({ type: "LOGOUT" });
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -104,7 +109,7 @@ const Authprovider = ({ children }) => {
         isLoading: state.isLoading,
         currentUser: state.currentUser,
         isError: state.isError,
-        Logout
+        Logout,
       }}
     >
       {children}

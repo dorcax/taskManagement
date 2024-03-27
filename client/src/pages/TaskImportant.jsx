@@ -13,7 +13,7 @@ const TaskImportant = () => {
   useEffect(()=>{
     const getTask =async()=>{
       try {
-        const response =await axios.get("http://localhost:4000/task",{
+        const response =await axios.get("https://taskmanagement-zg03.onrender.com/task",{
           headers:{
             "Authorization":`Bearer ${localStorage.getItem("token")}`
           }
@@ -67,7 +67,7 @@ return ()=>{
      setOpen(!open)
    }
   return (
-    <div className='border border-solid rounded-lg min-h-screen bg-[#212121] border-stone-600  px-10  '>
+    <div className='border border-solid rounded-lg min-h-screen bg-[#212121] w-full border-stone-600  px-10  '>
       <div className='text-3xl capitalize py-10 flex justify-between'>
     
      <div>

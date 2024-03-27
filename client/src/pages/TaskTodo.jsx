@@ -13,7 +13,7 @@ const TaskImportant = () => {
   useEffect(()=>{
     const getTask =async()=>{
       try {
-        const response =await axios.get("http://localhost:4000/task",{
+        const response =await axios.get("https://taskmanagement-zg03.onrender.com/task",{
           headers:{
             "Authorization":`Bearer ${localStorage.getItem("token")}`
           }
@@ -81,7 +81,7 @@ return ()=>{
    <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 py-2 sm:gap-10">
         
         {task && task.length >0 &&task.map((er)=>{
-          if(er.status=="INCOMPLETE"){
+          if(er.status=="TODO"){
             return (<div className='border border-solid shadow-2xl bg-white    text-black rounded-lg'>
             <div className=''>
          {/* {isEdit && <EditTask taskId={er.id} imageId={er.image.id} closeMenu={isEditModal}/>} */}

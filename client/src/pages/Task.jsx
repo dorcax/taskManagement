@@ -13,7 +13,7 @@ const Task = () => {
   useEffect(()=>{
     const getTask =async()=>{
       try {
-        const response =await axios.get("http://localhost:4000/task",{
+        const response =await axios.get("https://taskmanagement-zg03.onrender.com/task",{
           headers:{
             "Authorization":`Bearer ${localStorage.getItem("token")}`
           }

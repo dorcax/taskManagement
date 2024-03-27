@@ -1,6 +1,10 @@
-import React, { useContext, useEffect, useReducer, useRef } from "react";
+import React, { useContext, useEffect, useReducer, useRef, useState } from "react";
 import axios from "axios"
 import { TaskContext } from "../Context/TaskContext";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// FUNCTION REDUCER
 const reducer =(state,action)=>{
   switch(action.type){
     case "Set_TITLE":
@@ -20,12 +24,16 @@ const reducer =(state,action)=>{
   
   }
 }
+
+// enum value
 const status ={
-  INCOMPLETE:"INCOMPLETE",
+  TODO:"TODO",
   COMPLETE:"COMPLETE",
   IMPORTANT:"IMPORTANT"
 
 }
+
+// add task component
 const AddTask = ({closeMenu}) => {
   const initialState ={
     title:"",
@@ -46,9 +54,33 @@ const{dispatched}=useContext(TaskContext)
     dispatch({type:"Set_IMAGE",payload:file})
   }
 
+
+  // validate task
+  const[error,setError] =useState(null)
+  const validateTask =()=>{
+    let newError =[]
+    let valid =true
+
+    if(!state.title.trim()){
+      newError.title="please title is required("
+      valid=false
+    }
+    if(!state.description.trim()){
+      newError.description=" please description is required"
+      valid=false
+    }
+    if(!state.image.trim()){
+      newError.image =" please image is required"
+      valid=false
+    }
+    setError(newError)
+    return valid 
+
+  }
   // handle submit of form
   
   const HandleSubmit =async(e)=>{
+    if(validateTask()){
     e.preventDefault()
     
    
@@ -62,7 +94,7 @@ const{dispatched}=useContext(TaskContext)
     
     try {
      
-      const response =await axios.post("http://localhost:4000/task",formData,
+      const response =await axios.post("https://taskmanagement-zg03.onrender.com/task",formData,
       {
         headers:{
           // "Content-Type": "multipart/form-data",
@@ -71,11 +103,14 @@ const{dispatched}=useContext(TaskContext)
       })
       dispatched({type:"Create_Task",payload:response.data})
       dispatch({type:"RESET",initialState})
-      console.log("task created successfully")
+      toast.success("task created successfully")
       closeMenu()
     } catch (error) {
-      console.log(error)
+      if(error.response){
+        toast.error(error.response.msg)
+      }
     }
+  }
 
   }
 
@@ -88,7 +123,7 @@ const{dispatched}=useContext(TaskContext)
       <div className="flex flex-col gap-5 p-10 ">
        <div className="flex justify-between items-center">
        <h2 className=" text-3xl capitalize">Create a task</h2>
-   <div onClick={closeMenu}>     <i className="fas fa-times text-2xl" ></i></div>
+  
        </div>
         
         <form action="" method="post" className=" text-xl" onSubmit={HandleSubmit}>
@@ -144,7 +179,7 @@ const{dispatched}=useContext(TaskContext)
             >
               <option value="">select your task status</option>
 
-              <option value={status.INCOMPLETE}>INCOMPLETE</option>
+              <option value={status.TODO}>TODO</option>
 
               <option value={status.COMPLETE}>COMPLETE</option>
               <option value={status.IMPORTANT}>IMPORTANT</option>
