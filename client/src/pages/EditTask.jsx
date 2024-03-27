@@ -90,7 +90,7 @@ const EditTask = ({closeMenu,taskId,imageId}) => {
       newError.description=" please description is required"
       valid=false
     }
-    if(!state.image.trim()){
+    if(!state.image){
       newError.image =" please image is required"
     }
     setError(newError)
