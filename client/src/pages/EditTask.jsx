@@ -77,7 +77,7 @@ const EditTask = ({closeMenu,taskId,imageId}) => {
   },[taskId])
 
   // validate form
-  const[error,setError] =useState(null)
+  const[error,setError] =useState([])
   const validateTask =()=>{
     let newError =[]
     let valid =true
@@ -92,6 +92,11 @@ const EditTask = ({closeMenu,taskId,imageId}) => {
     }
     if(!state.image){
       newError.image =" please image is required"
+      valid=false
+    }
+    if(!state.status){
+      newError.status =" please status is required"
+      valid=false
     }
     setError(newError)
     return valid 
@@ -161,6 +166,7 @@ const[prevImage,setPreImage]=useState(null)
               onChange={handleChange}
               className="w-full  h-14 rounded-lg bg-white shadow-2xl border border-solid mb-4 focus:outline-none px-4"
             />
+                         {error.title && <div className="text-red-600">{error.title}</div>}
           </div>
           <div>
             <label htmlFor="description" className=" capitalize text-xl  py-2">
@@ -174,6 +180,7 @@ const[prevImage,setPreImage]=useState(null)
               onChange={handleChange}
               className="w-full bg-white shadow-2xl border border-solid h-28 rounded-lg my-4 focus:outline-none px-4"
             />
+                         {error.description && <div className="text-red-600">{error.description}</div>}
           </div>
 
           <div className="flex flex-col">
@@ -185,13 +192,14 @@ const[prevImage,setPreImage]=useState(null)
               value={prevImage}
               onChange={handleFileChange}
               className="w-full bg-white shadow-2xl border border-solid  mb-4 py-2 rounded-lg"
+             
             />
             {prevImage &&  <img
                   src={prevImage}
                   alt="Previous Image"
                   className="w-full h-[200px] mb-4 rounded-lg"
                 />}
-            
+             {error.image && <div className="text-red-600">{error.image}</div>}
           </div>
           <div className="">
             <label htmlFor="status" className=" capitalize text-xl py-2  ">
@@ -212,6 +220,7 @@ const[prevImage,setPreImage]=useState(null)
               <option value={status.COMPLETE}>COMPLETE</option>
               <option value={status.IMPORTANT}>IMPORTANT</option>
             </select>
+            {error.status && <div className="text-red-600">{error.status}</div>}
           </div>
 
           <div className="flex justify-end items-center py-6 ">
