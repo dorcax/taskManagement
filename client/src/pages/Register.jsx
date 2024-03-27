@@ -90,16 +90,16 @@ return valid
           <span className="border border-solid border-gray-300 rounded-full  px-2 py-2 text-lg sm:my-4 md:my-0">
             manage all your task in one place 
           </span>
-          <p className="flex flex-col gap-4 text-blue-800 text-7xl capitalize font-bold items-center ">
+          <p className="flex flex-col gap-4 text-[#028C6A] text-7xl capitalize font-bold items-center ">
             <span>cloud based</span>
             <span className="pb-8">Task Manager</span>
-            <span className="border border-solid bg-blue-800 w-28 h-28 rounded-full animate-bounce  "></span>
+            <span className="border border-solid bg-[#028C6A]  w-28 h-28 rounded-full animate-bounce  "></span>
           </p>
         </div>
 
         {/* form side */}
         <div className="border border-solid md:max-w-2xl sm:max-w-xl w-full shadow-2xl  bg-white flex flex-col justify-center  px-6 my-4">
-          <div className="text-blue-800 text-5xl  font-semibold py-5 text-center">
+          <div className="text-[#028C6A]  text-5xl  font-semibold py-5 text-center">
             <h2>Welcome !!!!</h2>
           </div>
           <form action="flex flex-col justify-center items-center" onSubmit={handleSubmit} >
@@ -154,14 +154,14 @@ return valid
               />
               {error.password && <div className="text-red-600">{error.password}</div>}
             </div>
-            <div className="bg-blue-800  mx-auto text-center py-3 rounded-full my-4  mx-5 text-white text-sm">
+            <div className="bg-[#028C6A]   mx-auto text-center py-3 rounded-full my-4  mx-5 text-white text-sm">
             
               <button type="submit" className="capitalize text-xl">
                 sigin Up
               </button>
             </div>
             <p className="
-        text-xl text-black  text-center pb-4">Have an account ? <span className="text-blue-600  text-lg"><Link to="/login">Sign in</Link></span></p>
+        text-xl text-black  text-center pb-4">Have an account ? <span className="text-[#028C6A]   text-lg"><Link to="/login">Sign in</Link></span></p>
           </form>
         </div>
       </div>

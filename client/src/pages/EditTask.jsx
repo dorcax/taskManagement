@@ -216,7 +216,7 @@ const[prevImage,setPreImage]=useState(null)
 
           <div className="flex justify-end items-center py-6 ">
             
-            <button className="border border-solid bg-blue-800 px-2 py-3 rounded-lg text-white text-xl capitalize">
+            <button className="border border-solid bg-[#028C6A]  px-2 py-3 rounded-lg text-white text-xl capitalize">
               Edit task
             </button>
           </div>

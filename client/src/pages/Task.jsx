@@ -69,7 +69,7 @@ return ()=>{
      
      <div>
      <h2 className='pb-2 capitalize'>Completed  tasks</h2>
-        <div className='border border-solid border-green-600 w-16 h-0.5 '></div>
+        <div className='border border-solid border-[#028C6A]  w-16 h-0.5 '></div>
      </div>
         <div className='text-xl flex items-center justify-center border border-solid w-12 h-12 rounded-full px-3 py-2  hover:bg-blue-600 hover:transition hover:duration-500 hover:ease-in-out'onClick={OpenModal} >+
     
@@ -102,7 +102,7 @@ return ()=>{
        <div className='flex justify-between mx-3 py-4 items-center'>
         <div> 
         {/* conditional rendering  */}
-        <button className='border border-solid px-4 py-2 rounded-full text-xl bg-green-800 text-white lowercase'>{er.status}</button></div>
+        <button className='border border-solid px-4 py-2 rounded-full text-xl bg-[#028C6A]  text-white lowercase'>{er.status}</button></div>
         {/* end of conditional rendering */}
          
          <div className='px-1 flex'>

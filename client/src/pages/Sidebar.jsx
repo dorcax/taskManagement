@@ -1,10 +1,13 @@
-import React, { useContext, useState,useEffect } from 'react';
+import React, { useContext, useState,useEffect, useRef } from 'react';
 import { AuthContext } from '../Context/LoginHandlers';
 import { Link, useNavigate } from 'react-router-dom';
 
 
 const Sidebar = ({open,ToggleMenu}) => {
   const {IsAuthenticated,currentUser,Logout,getUser} =useContext(AuthContext)
+  const[Open,setOpen] =useState(false)
+
+  
 
   const navigate =useNavigate()
   useEffect(() => {
@@ -19,9 +22,8 @@ const  logout =()=>{
   Logout()
   navigate("/login")
 }
-// hamburger menu
+// function to click outside of  bar
 
-  // hamburger menu
 
   // endof hhamburger menu
   return ( 
@@ -60,16 +62,16 @@ const  logout =()=>{
     
       
 {/* hamburger */}
-<div className={open?' bg-[#212121] w-64  h-screen  fixed top-0 left-0  z-[100] border border-solid border-stone-600 rounded-lg transition ease-in-out duration-500  sm:mx-6 my-10':"fixed left-[-100%]"}>
+<div className={open?' bg-[#212121] w-64    fixed top-0 left-0  z-[100] border border-solid border-stone-600 rounded-lg  ease-in-out duration-500  sm:mx-6 my-10':"fixed left-[-100%]"}>
      
-      <div className='  flex flex-col justify-between  items-start h-screen    py-10 px-4 cursor-pointer'>
+      <div className='  flex flex-col justify-between  items-start  h-[580px]  py-10 px-4 cursor-pointer'>
         <div className='flex gap-2 items-center '>
           <div className=''>
             <img src="/images/image2.JPG" alt="Profile" className="w-20 h-20 rounded-full" />
           </div>
           <h3 className='text-white text-xl w-20 capitalize'>{currentUser?.name}</h3>
         {/* <div className='flex flex-end' >  {open && <i class="fas fa-times"></i>}</div> */}
-        <div className=' text-white text-3xl pl-10' onClick={ToggleMenu} >  {open && <i class="fas fa-times"></i>}</div>
+        {/* <div className=' text-white text-3xl pl-10' onClick={ToggleMenu} >  {open && <i class="fas fa-times"></i>}</div> */}
         </div>
      
         <div>

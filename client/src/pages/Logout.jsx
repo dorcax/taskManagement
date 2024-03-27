@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useRef} from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Logout = () => {
@@ -7,8 +7,9 @@ const Logout = () => {
         localStorage.removeItem("token")
         navigate("/login")
     }
+  
   return (
-    <div className='text-white text-xl' onClick={logout}> <i className="fas fa-sign-out-alt px-4"></i>Sign out</div>
+    <div className='text-white text-xl' onClick={logout} > <i className="fas fa-sign-out-alt px-4"></i>Sign out</div>
   )
 }
 

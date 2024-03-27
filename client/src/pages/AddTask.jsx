@@ -80,7 +80,7 @@ const{dispatched}=useContext(TaskContext)
   // handle submit of form
   
   const HandleSubmit =async(e)=>{
-    if(validateTask()){
+    // if(validateTask()){
     e.preventDefault()
     
    
@@ -94,7 +94,8 @@ const{dispatched}=useContext(TaskContext)
     
     try {
      
-      const response =await axios.post("https://taskmanagement-zg03.onrender.com/task",formData,
+      const response =await axios.post("https://taskmanagement-zg03.onrender.com/task",
+      formData,
       {
         headers:{
           // "Content-Type": "multipart/form-data",
@@ -110,7 +111,7 @@ const{dispatched}=useContext(TaskContext)
         toast.error(error.response.msg)
       }
     }
-  }
+  // }
 
   }
 
@@ -126,9 +127,9 @@ const{dispatched}=useContext(TaskContext)
   
        </div>
         
-        <form action="" method="post" className=" text-xl" onSubmit={HandleSubmit}>
-          <div className="flex flex-col">
-            <label htmlFor="title" className=" capitalize text-xl  py-2">
+        <form action="flex flex-col " method="post" className=" text-2xl" onSubmit={HandleSubmit}>
+          <div className=" my-2 py-2">
+            <label htmlFor="title" className=" capitalize text-2xl  py-2">
               title
             </label>
             <input
@@ -137,11 +138,12 @@ const{dispatched}=useContext(TaskContext)
               id=""
               value={state.title}
               onChange={handleChange}
-              className="w-full  h-14 rounded-lg bg-white shadow-2xl border border-solid mb-4 focus:outline-none px-4"
+              className="w-full  h-14 rounded-lg bg-white shadow-2xl border  border-solid mb-4 focus:outline-none px-4"
             />
           </div>
-          <div>
-            <label htmlFor="description" className=" capitalize text-xl  py-2">
+          <div className="
+          my-2 py-2">
+            <label htmlFor="description" className=" capitalize text-2xl  py-2">
               description
             </label>
             <input
@@ -154,8 +156,8 @@ const{dispatched}=useContext(TaskContext)
             />
           </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="image" className=" capitalize text-xl py-2 ">upload file</label>
+          <div className="my-2 py-2">
+            <label htmlFor="image" className=" capitalize text-2xl py-2 ">upload file</label>
             <input
               type="file"
               name="image"
@@ -165,8 +167,8 @@ const{dispatched}=useContext(TaskContext)
               className="w-full bg-white shadow-2xl border border-solid  mb-4 py-2 rounded-lg"
             />
           </div>
-          <div className="">
-            <label htmlFor="status" className=" capitalize text-xl py-2  ">
+          <div className="my-2 py-2">
+            <label htmlFor="status" className=" capitalize text-2xl py-2  ">
               task status
             </label>
             <select
@@ -186,9 +188,9 @@ const{dispatched}=useContext(TaskContext)
             </select>
           </div>
 
-          <div className="flex justify-end items-center py-6 ">
+          <div className="flex justify-end items-center py-4 ">
             
-            <button className="border border-solid bg-blue-800 px-2 py-3 rounded-lg text-white text-xl capitalize">
+            <button className="border border-solid bg-[#028C6A]  px-2 py-3 rounded-lg text-white text-xl capitalize">
               + create A task
             </button>
           </div>
