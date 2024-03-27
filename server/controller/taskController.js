@@ -1,50 +1,64 @@
 const db = require("../connection/db")
 const cloudinary = require("../util/cloudinary")
+const upload =require("../multer")
+const {customError} =require("../middleware/CustomError")
+const validateTask = require("../validationJoi/TaskValidation")
 
 
 // create task
 
-module.exports.createTask = async (req, res) => {
+module.exports.createTask = async (req, res,next) => {
 
 
     try {
-        const { title, description, status } = req.body
-
-        // const result = await cloudinary.uploader.upload(req.file.path)
-        // // console.log(req.files)
+        const{error,value}=validateTask(req.body)
+        if(error){
+            return next (customError({error:error.details[0].message},400))
+        }
+        const { title, description, status } = value
+        if (!req.file) {
+            return next(customError('No file uploaded',404));
+        }
+        const result = await cloudinary.uploader.upload(req.file.path)
+        // console.log(req.files.path)
         const id = req.User.id
         const task = await db.task.create({
             data: {
-                title,
-                description,
-                status,
-                // image:{
-                // create:{
-                //     image_id:result.public_id,
-                //     image_url:result.secure_url
-                // }
-                // },
+              ...value,
+                image:{
+                create:{
+                    image_id:result.public_id,
+                    image_url:result.secure_url,
+
+                    User: {
+                        connect: {
+                          id: req.User.id
+                        },
+                      },
+
+                }
+            },
                 user: {
                     connect: {
-                        id: id
-                    }
-                }
+                      id: req.User.id,
+                    },
+                  },
+            },
+            include:{
+                image:true
             }
         })
-        res.status(201).json(task)
 
+         return res.status(201).json(task)
+ 
     }
-    catch (error) {
-        res.status(404).json({ error: error })
+    catch(error){
+        return next(customError("error creating task",401))
     }
-
-
-
 }
 
-
-// get one user task
-module.exports.getTask = async (req, res) => {
+// // get one user task
+module.exports.getTask = async (req, res,next) => {
     try {
         const { taskId } = req.params
         const task = await db.task.findUnique({
@@ -52,14 +66,11 @@ module.exports.getTask = async (req, res) => {
                 id: +taskId,
                 userId: req.User.id
             },
-            select: {
-                title: true,
-                description: true,
-                user: true,
-                image: true
+            include:{
+                image:true
             }
         })
-        res.status(200).json({ task: task })
+      return  res.status(200).json({ task: task })
     } catch (error) {
         res.status(404).json("not can't get the user task ")
 
@@ -69,70 +80,76 @@ module.exports.getTask = async (req, res) => {
 
 
 // get all single user and  include all their  task
-module.exports.getAllTask = async (req, res) => {
+module.exports.getAllTask = async (req, res,next) => {
     try {
-        const task = await db.user.findUnique({
-            where: { id: req.User.id },
-            select: {
-                // image:true,
-                task: {
-                    select: {
-                        id: true,
-                        title: true, description: true, status: true, dueDate: true,
-                        image: true
-                    }
-                },
-                image:true
-            },
+        const task = await db.task.findMany({
+            where: { userId: req.User.id },
+        include:{
+            image:true
+        }
+
+            
 
         })
-        res.status(200).json({ task: task })
+        return res.status(200).json({ task: task })
     } catch (error) {
-        res.status(404).json("unable to get a user all tasks")
+        return next (customError("unable to get a user all tasks",404))
     }
 
 }
 // update oonly one task
 
-module.exports.updateTask = async (req, res) => {
+module.exports.updateTask = async (req, res,next) => {
     try {
-        const { taskId } = req.params
-        const { title, description, } = req.body
+        const{error,value}=validateTask(req.body)
+        if(error){
+            return next (customError(error.details[0].message,400))
+        }
+        const { taskId,imageId } = req.params
+        const { title, description, status} = value
         console.log(req.User.id)
+        const result =await cloudinary.uploader.upload(req.file.path)
         const updateTask = await db.task.update({
             where: { id: +taskId, userId: req.User.id },
             data: {
-                title,
-                description,
-
+                ...value,
+                image:{
+                    update:{
+                        where:{
+                            id:+imageId
+                        },
+                        data:{
+                            image_url:result.secure_url
+                        }
+                    }
+                   
+                   
+                }
+               
             },
 
-            select: {
-                title: true,
-                description: true,
-                user: true,
-                image: true 
-
-            }
+         include:{
+            image:true
+         }
         })
-        res.status(200).json({
-            Task: updateTask
+         return res.status(200).json({
+        task: updateTask
         })
-    } catch (error) {
-        res.status(404).json({ error: "unable to update the task" })
+} catch (error) {
+       return next(customError("unable to update the task",404)) 
     }
 
 }
 // delete task
-module.exports.deleteTask =async(req,res)=>{
+module.exports.deleteTask =async(req,res,next)=>{
   try {
     const {taskId} =req.params
     const task =await db.task.delete({
         where:{id:+taskId,userId:req.User.id}
     })  
     // console.log("deleted")
-    res.status(200).json("deleted") 
+    return res.status(200).json(task) 
   } catch (error) {
-    res.status(404).json({error:"unable to delete the task"})
+    return next(customError("error in deleting the task"))
   }
 }

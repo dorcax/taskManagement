@@ -9,7 +9,8 @@ const path =require("path")
 const storage =multer.diskStorage({
     // destination:path.join(__dirname,"uploads"),
     filename: function (req, file, cb) {
-        cb(null,new Date().getTime() + path.extname(file.originalname))
+        // cb(null,new Date().getTime() + path.extname(file.originalname))
+        cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`)
     }
 })
 // file validation
@@ -24,7 +25,7 @@ const fileFilter=(req,file,cb)=>{
 
 const upload=multer({
     storage:storage,
-    limits:{fileSize:1024*1024},
+    limits:{fileSize:10*1024*1024},
     fileFilter:fileFilter
 })
 // const storage = multer.memoryStorage(); // Store files in memory for Cloudinary upload

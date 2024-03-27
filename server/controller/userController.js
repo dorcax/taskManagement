@@ -1,11 +1,26 @@
 const db =require("../connection/db")
 const bcrypt =require("bcrypt")
 const jwt =require("jsonwebtoken")
+const { validateUser, validateLogin } = require("../validationJoi/UserValidation")
+const { CustomError } = require("../middleware/CustomError")
 
 // an endpoint to register user
-module.exports.createUser =async(req,res)=>{
+module.exports.createUser =async(req,res,next)=>{
     try {
         const {name,email,password} =req.body
+        const{error}=validateUser(req.body)
+        if(error){
+            return next(CustomError(error.details[0].message,404))
+        }
+        const existingUser =await db.user.findUnique({
+            where:{
+                email:email
+            }
+          
+        })
+        if(existingUser){
+            return next(CustomError("user already exist",404))
+            }
         const genSalt =await bcrypt.genSalt(10)
         const hashedPassword =await bcrypt.hash(password,genSalt)
         const newuser ={name,email,password:hashedPassword}
@@ -15,9 +30,9 @@ module.exports.createUser =async(req,res)=>{
                 ...newuser
             }
         })
-       res.status(201).json("user sucessfully created")
+      return res.status(201).json("user sucessfully created")
     } catch (error) {
-        res.status(404).json("unable to create user")
+        return next(CustomError("unable to create user",404))
     }
 }
 
@@ -25,9 +40,10 @@ module.exports.loginUser =async(req,res)=>{
     try {
        const{email,password}=req.body
     //    check for email and password
-       if(!email ||!password){
-        res.status(401).json("please enter your email and password")
-       } 
+      const{error} =validateLogin(req.body)
+      if(error){
+        return next(CustomError("please provide valid credentials"))
+      }
     //    check if email exist
        const User =await db.user.findUnique({
         where:{
@@ -35,20 +51,36 @@ module.exports.loginUser =async(req,res)=>{
         }
        })
        if(!User){
-        res.status(401).json("invalid credential")
+       return next(CustomError("invalid credential",404))
        }
     //   compare password
        const isMatch =await bcrypt.compare(password,User.password)
        if(isMatch){
             //    create token
         const token =jwt.sign({id:User.id,email},process.env.JWT_SECRET,{expiresIn:"1d"})
-        res.status(401).json({message:"user successfully logged in",User,token})
+         return res.status(201).json({message:"user successfully logged in",User:User,token:token})
         
        }else{
-        res.status(401).json("user not unathenticated")
+        return next(CustomError("user not unathenticated",401))
        }
     }
     catch (error) {
-        res.status(401).json("user not authenticated")
+        return next (CustomError("user not authenticated",401))
     }
+}
+
+
+// fetched user
+module.exports.getUser =async(req,res)=>{
+    try {
+        const user =await db.user.findUnique({
+            where:{
+                id:req.User.id
+            }
+        })
+    return res.status(200).json({user:user})
+    } catch (error) {
+        return next(CustomError("no user found with particular id",404))
+    }
+
 }

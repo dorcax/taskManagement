@@ -4,8 +4,9 @@ const port =process.env.PORT||4000
 require("dotenv").config()
 const userRouter =require("./router/userRouter")
 const taskRouter=require("./router/taskRouter")
-const isAuthenticated =require("./middleware/auth")
-const imageRouter =require("./router/imageRouter")
+
+const cors =require("cors") 
+const ErrorHandler = require("./middleware/ErrorHandler")
 
 
 
@@ -15,12 +16,13 @@ const imageRouter =require("./router/imageRouter")
 app.use(express.urlencoded({extended:true}))
 
 app.use(express.json())
-
+app.use(cors())
 
 app.use("/user",userRouter)
-app.use("/task",isAuthenticated,taskRouter)
-app.use("/image",isAuthenticated,imageRouter)
-// app.use(fileupload({useTempFiles:true}))
+app.use("/task",taskRouter)
+
+app.use(ErrorHandler)
+
 
 
 
