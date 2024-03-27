@@ -102,7 +102,7 @@ return ()=>{
             </div>
           )}
       <div className='mx-3'>
-        <h2 className='capitalize text-2xl'>{er.title}</h2>
+        <h2 className='capitalize text-3xl'>{er.title}</h2>
          <p className='text-xl break-words'>{er.description}</p>
          <p className='py-2 text-lg'>{new Date(er.dueDate).toLocaleDateString()}</p>
       </div>
