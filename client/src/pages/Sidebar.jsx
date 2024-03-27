@@ -26,7 +26,7 @@ const  logout =()=>{
   // endof hhamburger menu
   return ( 
     <div className='relative'>
-      <div className=' hidden lg:bg-[#212121] lg:w-56  lg:h-screen  fixed top-0 left-0 lg:border lg:border-solid lg:border-stone-600 lg:rounded-lg   lg:mx-10 lg:my-10'>
+      <div className='sm:hidden lg:block lg:bg-[#212121] lg:w-56  lg:h-screen  fixed top-0 left-0 lg:border lg:border-solid lg:border-stone-600 lg:rounded-lg   lg:mx-10 lg:my-10'>
      
       <div className='  flex flex-col justify-between  items-start h-screen    py-10 px-4 cursor-pointer'>
         <div className='flex gap-2 items-center '>
