@@ -19,9 +19,9 @@ app.use(express.json())
 
 // app.use(cors())
 const corsOptions ={
-    origin:'https://task-managementweb.netlify.app/', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
+  origin: ["http://localhost:5173", "https://task-managementweb.netlify.app/"],
+  credentials: true, // Access-Control-Allow-Credentials header
+  optionsSuccessStatus: 200, // HTTP
   }
   app.use(cors(corsOptions));
   // Middleware to allow CORS
