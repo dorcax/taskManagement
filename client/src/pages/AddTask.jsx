@@ -114,15 +114,29 @@ const{dispatched}=useContext(TaskContext)
           "Authorization":`Bearer ${localStorage.getItem("token")}`
         }
       })
-      dispatched({type:"Create_Task",payload:response.data})
+      dispatched({type:"Create_Task",payload:response.data.task})
       console.log(response.data)
       dispatch({type:"RESET",initialState})
       toast.success("task created successfully")
       closeMenu()
     } catch (error) {
-      if(error.response){
-        toast.error(error.response.data.msg)
-        console.log(error.response.data.msg)
+      // if(error.response){
+      //   toast.error(error.response.data.msg)
+      //   console.log(error.response.data.msg)
+      // }
+      if (error.response && error.response.data && error.response.data.msg) {
+        // Check if msg is an object
+        const errorMsg = typeof error.response.data.msg === 'object'
+          ? JSON.stringify(error.response.data.msg) // stringify if it's an object
+          : error.response.data.msg; // otherwise, use it as is
+
+        toast.error(errorMsg);
+        console.log("Error response:", error.response);
+        console.log("Error message:", errorMsg);
+      } else {
+        // Handle other types of errors
+        toast.error("An error occurred while creating the task.");
+        console.log("Error:", error);
       }
     }
   }
