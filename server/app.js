@@ -12,12 +12,6 @@ const port = process.env.PORT || 4000;
 
 
 // const fileupload =require("express-fileupload")
-
-
-app.use(express.urlencoded({extended:true}))
-
-app.use(express.json())
-
 // app.use(cors())
 const corsOptions ={
   origin: ["http://localhost:5173", "https://task-managementweb.netlify.app"],
@@ -28,6 +22,12 @@ const corsOptions ={
   }
   app.use(cors(corsOptions));
   // Middleware to allow CORS
+
+app.use(express.urlencoded({extended:true}))
+
+app.use(express.json())
+
+
 
 app.use("/user",userRouter)
 app.use("/task",taskRouter)

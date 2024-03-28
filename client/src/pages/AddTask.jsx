@@ -86,34 +86,43 @@ const{dispatched}=useContext(TaskContext)
   const HandleSubmit =async(e)=>{
     e.preventDefault()
     if(validateTask()){
-   
-    
-   
-   
-    const formData = new FormData();
-    formData.append("title",state.title)
+  //  
+  const formData = new FormData();
+  formData.append("title",state.title)
 
-    formData.append("description",state.description)
-    formData.append("image",state.image)
-    formData.append("status",state.status)
+  formData.append("description",state.description)
+  formData.append("image",state.image)
+ 
+  console.log("Form Data:", formData)
+  for (const entry of formData.entries()) {
+    console.log(entry[0] + ": " + entry[1]);
+  }
+   
+   
+   
     
     try {
-     
-      const response =await axios.post("https://taskmanagement-zg03.onrender.com/task",
-      formData,
+      
+  
+      const response =await axios.post("https://taskmanagement-zg03.onrender.com/task/", formData,
+
+
+    
       {
         headers:{
-          // "Content-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data",
           "Authorization":`Bearer ${localStorage.getItem("token")}`
         }
       })
       dispatched({type:"Create_Task",payload:response.data})
+      console.log(response.data)
       dispatch({type:"RESET",initialState})
       toast.success("task created successfully")
       closeMenu()
     } catch (error) {
       if(error.response){
-        toast.error(error.response)
+        toast.error(error.response.data.msg)
+        console.log(error.response.data.msg)
       }
     }
   }
@@ -212,3 +221,6 @@ const{dispatched}=useContext(TaskContext)
 };
 
 export default AddTask;
+
+
+

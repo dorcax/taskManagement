@@ -189,7 +189,7 @@ const[prevImage,setPreImage]=useState(null)
               type="file"
               name="image"
               id=""
-              value={prevImage}
+            
               onChange={handleFileChange}
               className="w-full bg-white shadow-2xl border border-solid  mb-4 py-2 rounded-lg"
              
