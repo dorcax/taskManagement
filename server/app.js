@@ -19,7 +19,7 @@ app.use(express.json())
 
 // app.use(cors())
 const corsOptions ={
-  origin: ["http://localhost:5173", "https://task-managementweb.netlify.app/"],
+  origin: ["http://localhost:5173", "https://task-managementweb.netlify.app"],
   credentials: true, // Access-Control-Allow-Credentials header
   optionsSuccessStatus: 200, // HTTP
   }
