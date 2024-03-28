@@ -1,7 +1,7 @@
 const db = require("../connection/db")
 const cloudinary = require("../util/cloudinary")
 const upload =require("../multer")
-const {customError} =require("../middleware/CustomError")
+const {CustomError} =require("../middleware/CustomError")
 const validateTask = require("../validationJoi/TaskValidation")
 
 
@@ -13,11 +13,11 @@ module.exports.createTask = async (req, res,next) => {
     try {
         const{error,value}=validateTask(req.body)
         if(error){
-            return next (customError({error:error.details[0].message},400))
+            return next (CustomError({error:error.details[0].message},400))
         }
         const { title, description, status } = value
         if (!req.file) {
-            return next(customError('No file uploaded',404));
+            return next(CustomError('No file uploaded',404));
         }
         const result = await cloudinary.uploader.upload(req.file.path)
         // console.log(req.files.path)
@@ -53,7 +53,7 @@ module.exports.createTask = async (req, res,next) => {
  
     }
     catch(error){
-        return next(customError("error creating task",401))
+        return next(CustomError("error creating task",401))
     }
 }
 
@@ -72,7 +72,7 @@ module.exports.getTask = async (req, res,next) => {
         })
       return  res.status(200).json({ task: task })
     } catch (error) {
-        res.status(404).json("not can't get the user task ")
+        return next(CustomError("not can't get the user task ",404))
 
     }
 
@@ -93,7 +93,7 @@ module.exports.getAllTask = async (req, res,next) => {
         })
         return res.status(200).json({ task: task })
     } catch (error) {
-        return next (customError("unable to get a user all tasks",404))
+        return next (CustomError("unable to get a user all tasks",404))
     }
 
 }
@@ -103,7 +103,7 @@ module.exports.updateTask = async (req, res,next) => {
     try {
         const{error,value}=validateTask(req.body)
         if(error){
-            return next (customError(error.details[0].message,400))
+            return next (CustomError(error.details[0].message,400))
         }
         const { taskId,imageId } = req.params
         const { title, description, status} = value
@@ -136,7 +136,7 @@ module.exports.updateTask = async (req, res,next) => {
         task: updateTask
         })
 } catch (error) {
-       return next(customError("unable to update the task",404)) 
+       return next(CustomError("unable to update the task",404)) 
     }
 
 }
@@ -150,6 +150,6 @@ module.exports.deleteTask =async(req,res,next)=>{
     // console.log("deleted")
     return res.status(200).json(task) 
   } catch (error) {
-    return next(customError("error in deleting the task"))
+    return next(CustomError("error in deleting the task"))
   }
 }
