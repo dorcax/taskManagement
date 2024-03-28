@@ -1,6 +1,6 @@
 const express =require("express")
 const app =express()
-const port =process.env.PORT||4000
+// const port =process.env.PORT||4000
 require("dotenv").config()
 const userRouter =require("./router/userRouter")
 const taskRouter=require("./router/taskRouter")
@@ -8,6 +8,7 @@ const taskRouter=require("./router/taskRouter")
 const cors =require("cors") 
 const ErrorHandler = require("./middleware/ErrorHandler")
 
+const port = process.env.PORT || 4000;
 
 
 // const fileupload =require("express-fileupload")
@@ -22,7 +23,7 @@ const corsOptions ={
   origin: ["http://localhost:5173", "https://task-managementweb.netlify.app"],
   credentials: true, // Access-Control-Allow-Credentials header
   optionsSuccessStatus: 200, // HTTP status code for successful OPTIONS requests
-  methods: "GET, POST, PUT, DELETE", // Allowed HTTP methods
+  methods: "GET, POST, PATCH,DELETE", // Allowed HTTP methods
   allowedHeaders: "Content-Type, Authorization", // Allowed headers
   }
   app.use(cors(corsOptions));

@@ -11,11 +11,11 @@ module.exports.createTask = async (req, res,next) => {
 
 
     try {
-        const{error,value}=validateTask(req.body)
+        const{error}=validateTask(req.body)
         if(error){
             return next (CustomError({error:error.details[0].message},400))
         }
-        const { title, description, status } = value
+        const { title, description, status } = req.body
         if (!req.file) {
             return next(CustomError('No file uploaded',404));
         }
@@ -24,7 +24,7 @@ module.exports.createTask = async (req, res,next) => {
         const id = req.User.id
         const task = await db.task.create({
             data: {
-              ...value,
+              ...req.body,
                 image:{
                 create:{
                     image_id:result.public_id,

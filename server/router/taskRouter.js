@@ -7,7 +7,7 @@ const {createTask,getTask, getAllTask, updateTask, deleteTask} =require("../cont
 
 
 
-router.post("/",Authentication,upload.single("image"),createTask)
+router.post("/createtask",Authentication,upload.single("image"),createTask)
 // router.post("/",createTask)
 router.get("/:taskId",Authentication,getTask)
 router.get("/",Authentication,getAllTask)
