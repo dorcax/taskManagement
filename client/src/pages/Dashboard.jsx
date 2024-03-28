@@ -103,19 +103,19 @@ return ()=>{
             </div>
           )}
       <div className='mx-3'>
-        <h2 className='capitalize text-3xl'>{er.title}</h2>
+        <h2 className=' text-3xl'>{er.title}</h2>
          <p className='text-xl break-words'>{er.description}</p>
          <p className='py-2 text-lg'>{new Date(er.dueDate).toLocaleDateString()}</p>
       </div>
       <div className='flex justify-between mx-3 py-4 items-center'>
        <div> 
        {/* conditional rendering  */}
-       {(er.status =="COMPLETE")?<button className='border border-solid px-4 py-2 rounded-full text-xl bg-green-800 text-white lowercase'>{er.status}</button>:(er.status =="IMPORTANT")?<button className='border border-solid px-4 py-2 rounded-full text-xl bg-blue-800 text-white lowercase'>{er.status}</button>:<button className='border border-solid px-4 py-2 rounded-full text-xl bg-red-800 text-white lowercase'>{er.status}</button>}</div>
+       {(er.status =="COMPLETE")?<button className='border border-solid px-6 py-2 rounded-full text-xl bg-green-800 text-white lowercase'>{er.status}</button>:(er.status =="IMPORTANT")?<button className='border border-solid px-6 py-2 rounded-full text-xl bg-blue-800 text-white lowercase'>{er.status}</button>:<button className='border border-solid px-6 py-2 rounded-full text-xl bg-red-800 text-white lowercase'>{er.status}</button>}</div>
        {/* end of conditional rendering */}
         
         {/* edit and the delete button */}
         <div className='px-1 flex'>
-          <button className='text-xl px-1 ' onClick={()=>isEditModal(er.id)} ><i class="far fa-edit"></i></button>
+          <button className='text-2xl px-1 ' onClick={()=>isEditModal(er.id)} ><i class="far fa-edit"></i></button>
 
           <DeleteTask taskId={er.id}/>
         </div>

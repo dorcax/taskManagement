@@ -26,7 +26,7 @@ const{dispatched} =useContext(TaskContext)
         // deleteTask()
   return (
     <div>
-        <button className='text-xl px-1' onClick={deleteTask}><i class="fas fa-trash" ></i></button>
+        <button className='text-2xl px-1' onClick={deleteTask}><i class="fas fa-trash" ></i></button>
     </div>
   )
 }

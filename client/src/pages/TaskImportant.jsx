@@ -98,18 +98,18 @@ return ()=>{
              </div>
            )}
        <div className='mx-3'>
-         <h2 className='capitalize text-2xl'>{er.title}</h2>
+         <h2 className=' text-2xl'>{er.title}</h2>
           <p className='text-xl break-words'>{er.description}</p>
           <p className='py-2 text-lg'>{new Date(er.dueDate).toLocaleDateString()}</p>
        </div>
        <div className='flex justify-between mx-3 py-4 items-center'>
         <div> 
         {/* conditional rendering  */}
-        <button className='border border-solid px-4 py-2 rounded-full text-xl bg-[#003E19] text-white lowercase'>{er.status}</button></div>
+        <button className='border border-solid px-6 py-2 rounded-full text-xl bg-[#003E19] text-white lowercase'>{er.status}</button></div>
         {/* end of conditional rendering */}
          
          <div className='px-1 flex'>
-           <button className='text-xl px-1 ' onClick={()=>isEditModal(er.id)} ><i class="far fa-edit"></i></button>
+           <button className='text-2 px-1 ' onClick={()=>isEditModal(er.id)} ><i class="far fa-edit"></i></button>
  
            <DeleteTask taskId={er.id}/>
          </div>
