@@ -88,7 +88,7 @@ return valid
       <div className="w-full  flex flex-col lg:flex-row items-center justify-center gap-28   ">
         <div className="flex items-center justify-center flex-col gap-6  mt-20">
           <span className="border border-solid border-gray-300 rounded-full  px-2 py-2 text-lg sm:my-4 md:my-0">
-            manage all your task in one place 
+            manage all your tasks in one place 
           </span>
           <p className="flex flex-col gap-4 text-[#028C6A] text-7xl capitalize font-bold items-center ">
             <span>cloud based</span>
@@ -154,7 +154,7 @@ return valid
               />
               {error.password && <div className="text-red-600">{error.password}</div>}
             </div>
-            <div className="bg-[#028C6A]   mx-auto text-center py-3 rounded-full my-4  mx-5 text-white text-sm">
+            <div className="bg-[#028C6A]    text-center py-3 rounded-full my-4  mx-10 text-white text-sm ">
             
               <button type="submit" className="capitalize text-xl">
                 sigin Up

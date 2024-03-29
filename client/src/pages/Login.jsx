@@ -120,7 +120,7 @@ const navigate =useNavigate()
               />
               {error.password && <div className="text-red-600">{error.password}</div>}
             </div>
-            <div className="bg-[#028C6A]  mx-auto text-center py-3 rounded-full my-4 mx-5 text-white text-xl">
+            <div className="bg-[#028C6A]   text-center py-3 rounded-full my-4 mx-10 text-white text-xl">
             
               <button type="submit" className="capitalize">
                 sign In

@@ -64,14 +64,14 @@ return ()=>{
    
 
   return (
-    <div className='border border-solid rounded-lg min-h-screen bg-[#212121] w-full border-stone-600  px-10  '>
+    <div className='border border-solid rounded-lg h-screen bg-[#212121] w-[85%] border-stone-600  px-10 fixed overflow-y-auto '>
       <div className='text-3xl capitalize py-10 flex justify-between'>
      
      <div>
      <h2 className='pb-2 capitalize'>Completed  tasks</h2>
         <div className='border border-solid border-[#028C6A]  w-16 h-0.5 '></div>
      </div>
-        <div className='text-xl flex items-center justify-center border border-solid w-12 h-12 rounded-full px-3 py-2  hover:bg-[#028C6A] hover:transition hover:duration-500 hover:ease-in-out'onClick={OpenModal} >+
+        <div className='text-xl flex items-center justify-center border border-solid w-12 h-12 cursor-pointer rounded-full px-3 py-2  hover:bg-[#028C6A] hover:transition hover:duration-500 hover:ease-in-out'onClick={OpenModal} >+
     
         </div>
       </div>
@@ -81,7 +81,7 @@ return ()=>{
   
    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 py-2 sm:gap-10">
         
-        {task && task.length >0 &&task.map((er)=>{
+        {task && task.length >0 &&task.filter((er)=>{
           if(er.status=="COMPLETE"){
             return (<div className='border border-solid shadow-2xl bg-white    text-black rounded-lg'>
             <div className=''>

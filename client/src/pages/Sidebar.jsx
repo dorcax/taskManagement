@@ -50,7 +50,7 @@ const  logout =()=>{
           </ul>
           
         </div>
-         <div  className=''>     {IsAuthenticated && currentUser?<div className="text-white text-xl " onClick={logout}>
+         <div  className=''>     {IsAuthenticated && currentUser?<div className="text-white text-xl py-10" onClick={logout}>
         <i className="fas fa-sign-out-alt px-4"></i>Sign out
         </div>:<div className="text-white text-xl capitalize">
         <i className="fas fa-sign-out-alt px-4"></i><Link to="/login">log in</Link>
@@ -62,7 +62,7 @@ const  logout =()=>{
     
       
 {/* hamburger */}
-<div className={open?' bg-[#212121] w-64    fixed top-0 left-0  z-[100] border border-solid border-stone-600 rounded-lg  ease-in-out duration-500  sm:mx-6 my-10':"fixed left-[-100%]"}>
+<div className={open?' bg-[#212121] w-64    fixed top-0 left-0   border border-solid border-stone-600 rounded-lg  ease-in-out duration-500  sm:mx-6 my-10 z-[300]':"fixed left-[-100%]"}>
      
       <div className='  flex flex-col justify-between  items-start  h-[600px]  py-10 px-4 cursor-pointer'>
         <div className='flex gap-2 items-center '>
@@ -70,8 +70,7 @@ const  logout =()=>{
             <img src="/images/image2.JPG" alt="Profile" className="w-20 h-20 rounded-full" />
           </div> */}
           <h3 className='text-white text-xl w-20 capitalize px-4 inline-block'>Hi {currentUser?.name?.split(" ")[0]}</h3>
-        {/* <div className='flex flex-end' >  {open && <i class="fas fa-times"></i>}</div> */}
-        {/* <div className=' text-white text-3xl pl-10' onClick={ToggleMenu} >  {open && <i class="fas fa-times"></i>}</div> */}
+        
         </div>
      
         <div>
