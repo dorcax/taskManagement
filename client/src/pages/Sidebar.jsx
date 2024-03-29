@@ -66,10 +66,10 @@ const  logout =()=>{
      
       <div className='  flex flex-col justify-between  items-start  h-[600px]  py-10 px-4 cursor-pointer'>
         <div className='flex gap-2 items-center '>
-          <div className=''>
+          {/* <div className=''>
             <img src="/images/image2.JPG" alt="Profile" className="w-20 h-20 rounded-full" />
-          </div>
-          <h3 className='text-white text-xl w-20 capitalize px-4'>{currentUser?.name}</h3>
+          </div> */}
+          <h3 className='text-white text-xl w-20 capitalize px-4 block'>Hi {currentUser?.name}</h3>
         {/* <div className='flex flex-end' >  {open && <i class="fas fa-times"></i>}</div> */}
         {/* <div className=' text-white text-3xl pl-10' onClick={ToggleMenu} >  {open && <i class="fas fa-times"></i>}</div> */}
         </div>
