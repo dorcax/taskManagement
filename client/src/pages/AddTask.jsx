@@ -92,11 +92,9 @@ const{dispatched}=useContext(TaskContext)
 
   formData.append("description",state.description)
   formData.append("image",state.image)
+  formData.append("status",state.status)
  
-  console.log("Form Data:", formData)
-  for (const entry of formData.entries()) {
-    console.log(entry[0] + ": " + entry[1]);
-  }
+
    
    
    
