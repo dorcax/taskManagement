@@ -101,18 +101,18 @@ module.exports.getAllTask = async (req, res,next) => {
 
 module.exports.updateTask = async (req, res,next) => {
     try {
-        const{error,value}=validateTask(req.body)
+        const{error}=validateTask(req.body)
         if(error){
             return next (CustomError(error.details[0].message,400))
         }
         const { taskId,imageId } = req.params
-        const { title, description, status} = value
+        const { title, description, status} = req.body
         console.log(req.User.id)
         const result =await cloudinary.uploader.upload(req.file.path)
         const updateTask = await db.task.update({
             where: { id: +taskId, userId: req.User.id },
             data: {
-                ...value,
+                ...req.body,
                 image:{
                     update:{
                         where:{
