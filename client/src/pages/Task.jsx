@@ -71,7 +71,7 @@ return ()=>{
      <h2 className='pb-2 capitalize'>Completed  tasks</h2>
         <div className='border border-solid border-[#028C6A]  w-16 h-0.5 '></div>
      </div>
-        <div className='text-xl flex items-center justify-center border border-solid w-12 h-12 rounded-full px-3 py-2  hover:bg-blue-600 hover:transition hover:duration-500 hover:ease-in-out'onClick={OpenModal} >+
+        <div className='text-xl flex items-center justify-center border border-solid w-12 h-12 rounded-full px-3 py-2  hover:bg-[#028C6A] hover:transition hover:duration-500 hover:ease-in-out'onClick={OpenModal} >+
     
         </div>
       </div>

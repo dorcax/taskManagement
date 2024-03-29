@@ -83,11 +83,11 @@ const EditTask = ({closeMenu,taskId,imageId}) => {
     let valid =true
 
     if(!state.title.trim()){
-      newError.title="please title is required("
+      newError.title="* title is required"
       valid=false
     }
     if(!state.description.trim()){
-      newError.description=" please description is required"
+      newError.description="  description is required"
       valid=false
     }
     if(!state.image){
@@ -95,7 +95,7 @@ const EditTask = ({closeMenu,taskId,imageId}) => {
       valid=false
     }
     if(!state.status){
-      newError.status =" please status is required"
+      newError.status ="  status is required"
       valid=false
     }
     setError(newError)

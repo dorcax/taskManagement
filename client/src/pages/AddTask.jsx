@@ -62,11 +62,11 @@ const{dispatched}=useContext(TaskContext)
     let valid =true
 
     if(!state.title.trim()){
-      newError.title="please title is required"
+      newError.title=" title is required"
       valid=false
     }
     if(!state.description.trim()){
-      newError.description=" please description is required"
+      newError.description="  description is required"
       valid=false
     }
     if(!state.image){
@@ -74,7 +74,7 @@ const{dispatched}=useContext(TaskContext)
       valid=false
     }
     if(!state.status){
-      newError.status=" please status is required"
+      newError.status="  status is required"
       valid=false
     }
     setError(newError)
@@ -168,7 +168,7 @@ const{dispatched}=useContext(TaskContext)
               onChange={handleChange}
               className="w-full  h-14 rounded-lg bg-white shadow-2xl border  border-solid mb-4 focus:outline-none px-4"
             />
-             {error.title && <div className="text-red-600">{error.title}</div>}
+             {error.title && <div className="text-red-600 text-md">{error.title}</div>}
           </div>
           <div className="
           my-2 py-2">
@@ -183,7 +183,7 @@ const{dispatched}=useContext(TaskContext)
               onChange={handleChange}
               className="w-full bg-white shadow-2xl border border-solid h-28 rounded-lg my-4 focus:outline-none px-4"
             />
-             {error.description && <div className="text-red-600">{error.description}</div>}
+             {error.description && <div className="text-red-600 text-md">{error.description}</div>}
           </div>
 
           <div className="my-2 py-2">
@@ -196,7 +196,7 @@ const{dispatched}=useContext(TaskContext)
               onChange={handleFileChange}
               className="w-full bg-white shadow-2xl border border-solid  mb-4 py-2 rounded-lg"
             />
-             {error.image && <div className="text-red-600">{error.image}</div>}
+             {error.image && <div className="text-red-600 text-md">{error.image}</div>}
           </div>
           <div className="my-2 py-2">
             <label htmlFor="status" className=" capitalize text-2xl py-2  ">
@@ -212,12 +212,12 @@ const{dispatched}=useContext(TaskContext)
             >
               <option value="">select your task status</option>
 
-              <option value={status.TODO}>TODO</option>
+              <option value="TODO">TODO</option>
 
-              <option value={status.COMPLETE}>COMPLETE</option>
-              <option value={status.IMPORTANT}>IMPORTANT</option>
+              <option value="COMPELETE">COMPLETE</option>
+              <option value="IMPORTANT">IMPORTANT</option>
             </select>
-            {error.status && <div className="text-red-600">{error.status}</div>}
+            {error.status && <div className="text-red-600 text-md">{error.status}</div>}
           </div>
 
           <div className="flex justify-end items-center py-4 ">
