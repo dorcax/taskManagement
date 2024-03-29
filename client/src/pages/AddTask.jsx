@@ -212,10 +212,10 @@ const{dispatched}=useContext(TaskContext)
             >
               <option value="">select your task status</option>
 
-              <option value="TODO">TODO</option>
+              <option value={status.TODO}>TODO</option>
 
-              <option value="COMPELETE">COMPLETE</option>
-              <option value="IMPORTANT">IMPORTANT</option>
+              <option value={status.COMPLETE}>COMPLETE</option>
+              <option value={status.IMPORTANT}>IMPORTANT</option>
             </select>
             {error.status && <div className="text-red-600 text-md">{error.status}</div>}
           </div>
