@@ -13,7 +13,7 @@ module.exports.createTask = async (req, res,next) => {
     try {
         const{error}=validateTask(req.body)
         if(error){
-            return next (CustomError({error:error.details[0].message},400))
+            return next (CustomError(error.details[0].message,400))
         }
         const { title, description, status } = req.body
         if (!req.file) {
