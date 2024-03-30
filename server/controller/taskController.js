@@ -2,7 +2,7 @@ const db = require("../connection/db")
 const cloudinary = require("../util/cloudinary")
 const upload =require("../multer")
 const {CustomError} =require("../middleware/CustomError")
-const validateTask = require("../validationJoi/TaskValidation")
+const {validateTask,validateEditTask} = require("../validationJoi/TaskValidation")
 
 
 // create task
@@ -101,7 +101,7 @@ module.exports.getAllTask = async (req, res,next) => {
 
 module.exports.updateTask = async (req, res,next) => {
     try {
-        const{error}=validateTask(req.body)
+        const{error}=validateEditTask(req.body)
         if(error){
             return next (CustomError(error.details[0].message,400))
         }
