@@ -196,27 +196,8 @@ const{dispatched}=useContext(TaskContext)
             />
              {error.image && <div className="text-red-600 text-md">{error.image}</div>}
           </div>
-          <div className="my-2 py-2">
-            <label htmlFor="status" className=" capitalize text-2xl py-2  ">
-              task status
-            </label>
-            {/* <select
-              name="status"
-              id=""
-            
-              value={state.status}
-              onChange={handleChange}
-              className="w-full  block appearance-none bg-white shadow-2xl border border-solid py-2 rounded-lg my-4 text-black focus:outline-none py-3 px-4 text-lg shadow-xl focus:shadow-outline"
-            >
-              <option value="">select your task status</option>
-
-              <option value={status.TODO}>TODO</option>
-
-              <option value={status.COMPLETE}>COMPLETE</option>
-              <option value={status.IMPORTANT}>IMPORTANT</option>
-            </select> */}
-            {/* {error.status && <div className="text-red-600 text-md">{error.status}</div>} */}
-          </div>
+         
+           
 
           <div className="flex justify-end items-center py-4 ">
             
