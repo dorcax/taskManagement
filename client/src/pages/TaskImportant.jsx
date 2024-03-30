@@ -105,7 +105,7 @@ return ()=>{
        <div className='flex justify-between mx-3 py-4 items-center'>
         <div> 
         {/* conditional rendering  */}
-        <button className='border border-solid px-6 py-2 rounded-full text-xl bg-[#003E19] text-white lowercase'>{er.status}</button></div>
+        <button className='border border-solid px-6 py-2 rounded-full text-xl bg-[#003E19] text-white capitalize'>{er.status}</button></div>
         {/* end of conditional rendering */}
          
          <div className='px-1 flex'>
