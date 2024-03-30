@@ -73,10 +73,10 @@ const{dispatched}=useContext(TaskContext)
       newError.image =" please image is required"
       valid=false
     }
-    if(!state.status){
-      newError.status="  status is required"
-      valid=false
-    }
+    // if(!state.status){
+    //   newError.status="  status is required"
+    //   valid=false
+    // }
     setError(newError)
     return valid 
 
@@ -92,7 +92,7 @@ const{dispatched}=useContext(TaskContext)
 
   formData.append("description",state.description)
   formData.append("image",state.image)
-  formData.append("status",state.status)
+  // formData.append("status",state.status)
  
 
    
@@ -200,7 +200,7 @@ const{dispatched}=useContext(TaskContext)
             <label htmlFor="status" className=" capitalize text-2xl py-2  ">
               task status
             </label>
-            <select
+            {/* <select
               name="status"
               id=""
             
@@ -214,8 +214,8 @@ const{dispatched}=useContext(TaskContext)
 
               <option value={status.COMPLETE}>COMPLETE</option>
               <option value={status.IMPORTANT}>IMPORTANT</option>
-            </select>
-            {error.status && <div className="text-red-600 text-md">{error.status}</div>}
+            </select> */}
+            {/* {error.status && <div className="text-red-600 text-md">{error.status}</div>} */}
           </div>
 
           <div className="flex justify-end items-center py-4 ">
