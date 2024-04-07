@@ -28,7 +28,7 @@ const reducer =(state,action)=>{
 // enum value
 const status ={
   TODO:"TODO",
-  COMPLETE:"COMPLETED",
+  COMPLETED:"COMPLETED",
   IMPORTANT:"IMPORTANT"
 
 }

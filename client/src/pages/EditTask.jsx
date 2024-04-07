@@ -27,7 +27,7 @@ const reducer =(state,action)=>{
 }
 const status ={
   TODO:"TODO",
-  COMPLETE:"COMPLETED",
+  COMPLETED:"COMPLETED",
   IMPORTANT:"IMPORTANT"
 
 }

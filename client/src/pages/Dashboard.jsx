@@ -72,7 +72,7 @@ return ()=>{
 
   // daashboard code
   return (
-    <div className='border border-solid rounded-lg h-screen md:w-[85%] sm:w-full bg-[#212121] border-stone-600  px-10 fixed overflow-y-auto  '>
+    <div className='border border-solid rounded-lg h-screen lg:w-[85%] sm:w-full bg-[#212121] border-stone-600  px-10 fixed overflow-y-auto  '>
      
       <div className='text-3xl capitalize py-10 flex justify-between '>
     

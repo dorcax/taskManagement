@@ -24,6 +24,7 @@ const Register = () => {
     password: "",
   };
   const [state, dispatch] = useReducer(reducer, initialState);
+  const[isLoading,setisLoading] =useState(false)
   // handle change function updates the state based on the input field's name and value
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -73,6 +74,7 @@ return valid
         })
         toast.success("user successfully created")
         navigate("/login")
+        setisLoading(true)
         // dispatch({type:"RESET",payload:initialState}).
       } catch (error) {
         if(error.response){
@@ -158,6 +160,7 @@ return valid
             
               <button type="submit" className="capitalize text-xl">
                 sigin Up
+                {isLoading? <span className=""><i class="fas fa-spinner animate-spin px-5"></i></span>: null}
               </button>
             </div>
             <p className="

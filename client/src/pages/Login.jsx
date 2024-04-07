@@ -17,7 +17,7 @@ const reducer =(state,action)=>{
 }
 
 const Login = () => {
-  const{login,state} =useContext(AuthContext)
+  const{login,state,isLoading} =useContext(AuthContext)
   const initialState={
     email:"",
     password:""
@@ -123,7 +123,8 @@ const navigate =useNavigate()
             <div className="bg-[#028C6A]   text-center py-3 rounded-full my-4 mx-10 text-white text-xl">
             
               <button type="submit" className="capitalize">
-                sign In
+                sign In   
+                {isLoading&& <span className=""><i class="fas fa-spinner animate-spin px-5"></i></span>}
               </button>
             </div>
             <p className="text-xl  text-black mt-2 text-center pb-4">
