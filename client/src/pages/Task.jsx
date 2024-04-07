@@ -82,7 +82,7 @@ return ()=>{
    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 py-2 sm:gap-10">
         
         {task && task.length >0 &&task.filter((er)=>{
-          if(er.status=="COMPLETE"){
+          if(er.status=="COMPLETED"){
             return (<div className='border border-solid shadow-2xl bg-white    text-black rounded-lg'>
             <div className=''>
          {/* {isEdit && <EditTask taskId={er.id} imageId={er.image.id} closeMenu={isEditModal}/>} */}

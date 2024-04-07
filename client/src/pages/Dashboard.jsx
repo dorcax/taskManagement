@@ -110,7 +110,7 @@ return ()=>{
       <div className='flex justify-between mx-3 py-4 items-center'>
        <div> 
        {/* conditional rendering  */}
-       {(er.status =="COMPLETE")?<button className='border border-solid px-6 py-2 rounded-full text-xl bg-green-800 text-white capitalize'>{er.status}</button>:(er.status =="IMPORTANT")?<button className='border border-solid px-6 py-2 rounded-full text-xl bg-blue-800 text-white capitalize'>{er.status}</button>:<button className='border border-solid px-6 py-2 rounded-full text-xl bg-red-800 text-white capitalize'>{er.status}</button>}</div>
+       {(er.status =="COMPLETED")?<button className='border border-solid px-6 py-2 rounded-full text-xl bg-green-800 text-white capitalize'>{er.status}</button>:(er.status =="IMPORTANT")?<button className='border border-solid px-6 py-2 rounded-full text-xl bg-blue-800 text-white capitalize'>{er.status}</button>:<button className='border border-solid px-6 py-2 rounded-full text-xl bg-red-800 text-white capitalize'>{er.status}</button>}</div>
        {/* end of conditional rendering */}
         
         {/* edit and the delete button */}

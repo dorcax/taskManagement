@@ -48,7 +48,7 @@ model Image{
 
 enum Taskstatus {
     TODO
-  COMPLETE
+  COMPLETED
   IMPORTANT
 }
 

@@ -11,8 +11,8 @@ const reducer =(state,action)=>{
       return{...state,title:action.payload}
     case"Set_DESCRIPTION":
       return{...state,description:action.payload}
-    case"Set_IMAGE":
-      return{...state,image:action.payload}
+    // case"Set_IMAGE":
+    //   return{...state,image:action.payload}
     case "Set_STATUS":
       return{...state,status:action.payload}
    
@@ -27,7 +27,7 @@ const reducer =(state,action)=>{
 }
 const status ={
   TODO:"TODO",
-  COMPLETE:"COMPLETE",
+  COMPLETE:"COMPLETED",
   IMPORTANT:"IMPORTANT"
 
 }
@@ -90,10 +90,7 @@ const EditTask = ({closeMenu,taskId,imageId}) => {
       newError.description="  description is required"
       valid=false
     }
-    if(!state.image){
-      newError.image =" please image is required"
-      valid=false
-    }
+ 
     if(!state.status){
       newError.status ="  status is required"
       valid=false
@@ -113,7 +110,7 @@ const EditTask = ({closeMenu,taskId,imageId}) => {
     formData.append("title",state.title)
 
     formData.append("description",state.description)
-    formData.append("image",state.image)
+ 
     formData.append("status",state.status)
     
     try {
@@ -183,24 +180,14 @@ const[prevImage,setPreImage]=useState(null)
                          {error.description && <div className="text-red-600">{error.description}</div>}
           </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="image" className=" capitalize text-xl py-2 ">upload file</label>
-            <input
-              type="file"
-              name="image"
-              id=""
-            
-              onChange={handleFileChange}
-              className="w-full bg-white shadow-2xl border border-solid  mb-4 py-2 rounded-lg"
-             
-            />
+          
             {prevImage &&  <img
                   src={prevImage}
                   alt="Previous Image"
                   className="w-full h-[200px] mb-4 rounded-lg"
                 />}
-             {error.image && <div className="text-red-600">{error.image}</div>}
-          </div>
+            
+      
           <div className="">
             <label htmlFor="status" className=" capitalize text-xl py-2  ">
               task status
