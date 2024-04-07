@@ -63,7 +63,7 @@ return ()=>{
   })
 
   return (
-    <div className='border border-solid rounded-lg h-screen bg-[#212121] border-stone-600  px-10 w-[85%] fixed overflow-y-auto '>
+    <div className='border border-solid rounded-lg h-screen bg-[#212121] border-stone-600  px-10 md:w-[85%] sm:w-full fixed overflow-y-auto '>
       <div className='text-3xl capitalize py-10 flex justify-between'>
       
      <div>
